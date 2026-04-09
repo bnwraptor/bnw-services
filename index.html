@@ -3,216 +3,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BNW Digital Services</title>
+  <title>BNW — Digital Services</title>
+  <link rel="icon" type="image/png" href="https://bnwraptor.com/raptor-black.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
+    /* ─── Light theme (default) ─── */
     :root {
-      --red: #E63946;
-      --dark: #1D3557;
-      --light: #F1FAEE;
+      --bg: #F8F9FC;
+      --surface: #FFFFFF;
+      --surface-2: #F1F4F9;
+      --border: #E2E8F0;
+      --text: #0F172A;
+      --text-2: #475569;
+      --text-3: #94A3B8;
+      --accent: #E63946;
+      --accent-hover: #C1121F;
+      --accent-soft: rgba(230,57,70,0.08);
       --teal: #457B9D;
-      --white: #FFFFFF;
+      --teal-soft: rgba(69,123,157,0.1);
+      --green: #10B981;
+      --purple: #8B5CF6;
+      --yellow: #F59E0B;
+      --header-from: #0F172A;
+      --header-to: #1E3A5F;
+      --shadow-sm: 0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+      --shadow: 0 4px 16px rgba(15,23,42,0.08), 0 2px 6px rgba(15,23,42,0.04);
+      --shadow-lg: 0 12px 40px rgba(15,23,42,0.12), 0 4px 12px rgba(15,23,42,0.06);
+      --radius: 16px;
+      --radius-sm: 10px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ─── Dark theme ─── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0B0F1A;
+        --surface: #131929;
+        --surface-2: #1C2438;
+        --border: #1E2D45;
+        --text: #F1F5F9;
+        --text-2: #94A3B8;
+        --text-3: #475569;
+        --accent: #EF4444;
+        --accent-hover: #F87171;
+        --accent-soft: rgba(239,68,68,0.12);
+        --teal: #60A5FA;
+        --teal-soft: rgba(96,165,250,0.1);
+        --green: #34D399;
+        --purple: #A78BFA;
+        --yellow: #FBBF24;
+        --header-from: #0F172A;
+        --header-to: #1E293B;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+        --shadow: 0 4px 16px rgba(0,0,0,0.4);
+        --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+      }
+    }
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
     }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: linear-gradient(145deg, var(--header-from), var(--header-to));
+      color: #fff;
+      padding: 64px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(69,123,157,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(230,57,70,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    header > * { position: relative; z-index: 1; }
+
     .lang-toggle {
       position: absolute;
       top: 20px;
       right: 24px;
       display: flex;
       gap: 4px;
-      z-index: 10;
+      z-index: 2;
     }
     .lang-toggle button {
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.35);
-      color: #fff;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8);
       padding: 5px 14px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.3px;
+      transition: all 0.2s;
     }
-    .lang-toggle button:hover { background: rgba(255,255,255,0.25); }
+    .lang-toggle button:hover { background: rgba(255,255,255,0.18); color: #fff; }
     .lang-toggle button.active {
-      background: rgba(255,255,255,0.9);
-      color: var(--dark);
-      border-color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
+      color: var(--header-from);
+      border-color: transparent;
     }
-    header {
-      background: linear-gradient(135deg, var(--dark), var(--teal));
-      color: var(--white);
-      padding: 80px 20px 60px;
-      text-align: center;
-      position: relative;
+
+    .header-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid rgba(255,255,255,0.15);
     }
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 12px;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      line-height: 1.1;
     }
     header .subtitle {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      max-width: 600px;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
       margin: 0 auto;
+      font-weight: 400;
+      line-height: 1.6;
     }
-    .badge {
-      display: inline-block;
-      background: var(--red);
-      color: var(--white);
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      letter-spacing: 0.5px;
+
+    /* ─── Main content ─── */
+    main { margin-top: -40px; position: relative; z-index: 2; }
+
+    /* ─── Section label ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 12px;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 20px;
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--border);
     }
+
+    /* ─── Intro ─── */
     .intro {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 56px;
     }
     .intro h2 {
-      font-size: 2rem;
-      margin-bottom: 16px;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--text);
     }
     .intro p {
-      max-width: 700px;
+      max-width: 640px;
       margin: 0 auto;
-      color: #555;
-      font-size: 1.1rem;
+      color: var(--text-2);
+      font-size: 1.08rem;
     }
+
+    /* ─── Services grid ─── */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
+      gap: 20px;
+      margin-bottom: 56px;
     }
+
     .card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border-top: 4px solid var(--teal);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 28px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--border);
+      transition: background 0.2s;
     }
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
     }
-    .card.ai { border-top-color: var(--red); }
-    .card.data { border-top-color: var(--teal); }
-    .card.web { border-top-color: #2A9D8F; }
-    .card.automation { border-top-color: #E9C46A; }
-    .card.consulting { border-top-color: #9B5DE5; }
+    .card:hover::before { background: var(--card-accent, var(--accent)); }
+
+    .card.ai    { --card-accent: var(--accent); }
+    .card.data  { --card-accent: var(--teal); }
+    .card.web   { --card-accent: var(--green); }
+    .card.automation { --card-accent: var(--yellow); }
+    .card.consulting { --card-accent: var(--purple); }
+
     .card-icon {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      color: var(--dark);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+      background: var(--accent-soft);
+      color: var(--card-accent, var(--accent));
+      transition: transform 0.2s;
     }
+    .card:hover .card-icon { transform: scale(1.1); }
+
     .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-      color: var(--dark);
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
-    .card p {
-      color: #666;
-      font-size: 0.95rem;
+    .card > p {
+      color: var(--text-2);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
     }
     .card ul {
-      margin-top: 12px;
-      padding-left: 18px;
-      color: #555;
-      font-size: 0.9rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
-    .card ul li { margin-bottom: 4px; }
+    .card ul li {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      padding-left: 18px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--card-accent, var(--accent));
+      opacity: 0.7;
+    }
+
+    /* ─── Why section ─── */
     .why {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 48px;
-      margin-bottom: 60px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      margin-bottom: 56px;
+      box-shadow: var(--shadow-sm);
     }
     .why h2 {
       text-align: center;
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
       margin-bottom: 40px;
     }
     .why-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 32px;
     }
     .why-item { text-align: center; }
-    .why-item i {
-      font-size: 2.2rem;
-      color: var(--red);
-      margin-bottom: 8px;
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin: 0 auto 14px;
+      background: var(--accent-soft);
+      color: var(--accent);
     }
     .why-item h4 {
-      margin: 8px 0 6px;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
     }
     .why-item p {
-      color: #666;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.55;
     }
+
+    /* ─── CTA ─── */
     .cta {
+      background: linear-gradient(135deg, var(--header-from), #1E3A5F);
+      border-radius: var(--radius);
+      padding: 64px 24px;
       text-align: center;
-      background: linear-gradient(135deg, var(--dark), var(--teal));
-      color: var(--white);
-      border-radius: 16px;
-      padding: 60px 20px;
+      color: #fff;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
     }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(69,123,157,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta > * { position: relative; z-index: 1; }
     .cta h2 {
-      font-size: 2rem;
-      margin-bottom: 16px;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
     }
-    .cta p {
-      opacity: 0.85;
-      margin-bottom: 28px;
-      font-size: 1.1rem;
+    .cta > p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+      font-size: 1.05rem;
     }
     .cta a {
-      display: inline-block;
-      background: var(--red);
-      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #fff;
       padding: 14px 36px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 1.05rem;
-      transition: background 0.2s;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(230,57,70,0.35);
     }
-    .cta a:hover { background: #c1121f; }
+    .cta a:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(230,57,70,0.4);
+    }
+
+    /* ─── Footer ─── */
     footer {
       text-align: center;
-      padding: 40px 20px;
-      color: #888;
-      font-size: 0.9rem;
+      padding: 32px 24px 48px;
+      color: var(--text-3);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
     }
     footer a { color: var(--teal); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
-    /* Language visibility — all lang targets hidden by default */
+    /* ─── Language visibility ─── */
     [data-lang] { display: none; }
     [data-lang].active { display: block; }
     [data-lang-i] { display: none; }
     [data-lang-i].active { display: inline; }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      .why, .card { padding: 24px; }
-      .cta { padding: 40px 20px; }
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      header { padding: 52px 20px 64px; }
+      .why { padding: 36px 24px; }
+      .why-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .card { padding: 24px; }
     }
   </style>
 </head>
@@ -223,24 +419,25 @@
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
     <button id="btn-es" onclick="setLang('es')">ES</button>
   </div>
-
-
-
-  <img src="https://bnwraptor.com/raptor-black.png" alt="BNW Logo" style="height:56px;width:56px;border-radius:50%;object-fit:cover;margin-bottom:12px;">
+  <img class="header-logo" src="https://bnwraptor.com/raptor-black.png" alt="BNW">
   <h1>
     <span data-lang="en-h1">BNW Digital Services</span>
     <span data-lang="es-h1">BNW Servicios Digitales</span>
   </h1>
-
   <p class="subtitle">
-    <span data-lang="en-sub">AI-powered digital services for businesses, agencies, and enterprises — built with cutting-edge AI and delivered by BNW.</span>
-    <span data-lang="es-sub">Servicios digitales impulsados por IA para empresas, agencias y corporaciones — construidos con IA de vanguardia y entregados por BNW.</span>
+    <span data-lang="en-sub">AI-powered digital services for businesses, agencies, and enterprises. We build, automate, and deliver — so you can focus on growing.</span>
+    <span data-lang="es-sub">Servicios digitales impulsados por IA para empresas, agencias y corporaciones. Construimos, automatizamos y entregamos — para que tú te enfoques en crecer.</span>
   </p>
 </header>
 
+<main>
 <div class="container">
 
   <div class="intro">
+    <div class="section-label">
+      <span data-lang="en-i">Services</span>
+      <span data-lang="es-i">Servicios</span>
+    </div>
     <h2>
       <span data-lang="en-ih2">What We Offer</span>
       <span data-lang="es-ih2">Lo Que Ofrecemos</span>
@@ -255,14 +452,8 @@
 
     <div class="card ai">
       <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-      <h3>
-        <span data-lang="en">AI Agents & Automation</span>
-        <span data-lang="es">Agentes de IA y Automatización</span>
-      </h3>
-      <p>
-        <span data-lang="en">Custom AI agents that handle customer service, lead qualification, data entry, document processing, and more — running 24/7 without human intervention.</span>
-        <span data-lang="es">Agentes de IA personalizados que manejan servicio al cliente, calificación de prospectos, entrada de datos, procesamiento de documentos y más — funcionando 24/7 sin intervención humana.</span>
-      </p>
+      <h3><span data-lang="en">AI Agents & Automation</span><span data-lang="es">Agentes de IA y Automatización</span></h3>
+      <p><span data-lang="en">Custom AI agents that handle customer service, lead qualification, data entry, document processing, and more — running 24/7 without human intervention.</span><span data-lang="es">Agentes de IA personalizados que manejan servicio al cliente, calificación de prospectos, entrada de datos, procesamiento de documentos y más — funcionando 24/7 sin intervención humana.</span></p>
       <ul>
         <li><span data-lang="en">LLM-powered chatbots & virtual assistants</span><span data-lang="es">Chatbots y asistentes virtuales impulsados por LLM</span></li>
         <li><span data-lang="en">Workflow automation with AI decision-making</span><span data-lang="es">Automatización de flujos con toma de decisiones por IA</span></li>
@@ -273,14 +464,8 @@
 
     <div class="card data">
       <div class="card-icon"><i class="fa-solid fa-chart-simple"></i></div>
-      <h3>
-        <span data-lang="en">Data Scraping & Research</span>
-        <span data-lang="es">Extracción de Datos e Investigación</span>
-      </h3>
-      <p>
-        <span data-lang="en">Structured data extraction at scale — competitive intelligence, market research, lead lists, pricing monitoring, and custom datasets tailored to your needs.</span>
-        <span data-lang="es">Extracción de datos estructurados a escala — inteligencia competitiva, investigación de mercado, listas de prospectos, monitoreo de precios y conjuntos de datos personalizados.</span>
-      </p>
+      <h3><span data-lang="en">Data Scraping & Research</span><span data-lang="es">Extracción de Datos e Investigación</span></h3>
+      <p><span data-lang="en">Structured data extraction at scale — competitive intelligence, market research, lead lists, pricing monitoring, and custom datasets tailored to your needs.</span><span data-lang="es">Extracción de datos estructurados a escala — inteligencia competitiva, investigación de mercado, listas de prospectos, monitoreo de precios y conjuntos de datos personalizados.</span></p>
       <ul>
         <li><span data-lang="en">Web scraping & API aggregation</span><span data-lang="es">Web scraping y agregación de APIs</span></li>
         <li><span data-lang="en">Competitor monitoring & price intelligence</span><span data-lang="es">Monitoreo de competidores e inteligencia de precios</span></li>
@@ -290,15 +475,9 @@
     </div>
 
     <div class="card web">
-      <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
-      <h3>
-        <span data-lang="en">Web & App Development</span>
-        <span data-lang="es">Desarrollo Web y de Apps</span>
-      </h3>
-      <p>
-        <span data-lang="en">Full-stack digital product development — from landing pages and PWAs to full web applications, dashboards, and e-commerce solutions.</span>
-        <span data-lang="es">Desarrollo de productos digitales full-stack — desde landing pages y PWAs hasta aplicaciones web completas, dashboards y soluciones de e-commerce.</span>
-      </p>
+      <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+      <h3><span data-lang="en">Web & App Development</span><span data-lang="es">Desarrollo Web y de Apps</span></h3>
+      <p><span data-lang="en">Full-stack digital product development — from landing pages and PWAs to full web applications, dashboards, and e-commerce solutions.</span><span data-lang="es">Desarrollo de productos digitales full-stack — desde landing pages y PWAs hasta aplicaciones web completas, dashboards y soluciones de e-commerce.</span></p>
       <ul>
         <li><span data-lang="en">Responsive websites & landing pages</span><span data-lang="es">Sitios web responsivos y landing pages</span></li>
         <li><span data-lang="en">Web applications & dashboards</span><span data-lang="es">Aplicaciones web y dashboards</span></li>
@@ -309,14 +488,8 @@
 
     <div class="card automation">
       <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
-      <h3>
-        <span data-lang="en">Business Process Automation</span>
-        <span data-lang="es">Automatización de Procesos Empresariales</span>
-      </h3>
-      <p>
-        <span data-lang="en">Eliminate manual work by automating business processes end-to-end — from document handling and approvals to reporting and notifications.</span>
-        <span data-lang="es">Elimina el trabajo manual automatizando procesos empresariales de extremo a extremo — desde el manejo de documentos y aprobaciones hasta reportes y notificaciones.</span>
-      </p>
+      <h3><span data-lang="en">Business Process Automation</span><span data-lang="es">Automatización de Procesos Empresariales</span></h3>
+      <p><span data-lang="en">Eliminate manual work by automating business processes end-to-end — from document handling and approvals to reporting and notifications.</span><span data-lang="es">Elimina el trabajo manual automatizando procesos empresariales de extremo a extremo — desde el manejo de documentos y aprobaciones hasta reportes y notificaciones.</span></p>
       <ul>
         <li><span data-lang="en">Document processing & OCR pipelines</span><span data-lang="es">Procesamiento de documentos y pipelines OCR</span></li>
         <li><span data-lang="en">Automated reporting & data pipelines</span><span data-lang="es">Reportes automatizados y pipelines de datos</span></li>
@@ -327,14 +500,8 @@
 
     <div class="card consulting">
       <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
-      <h3>
-        <span data-lang="en">AI Consulting & Strategy</span>
-        <span data-lang="es">Consultoría y Estrategia de IA</span>
-      </h3>
-      <p>
-        <span data-lang="en">Not sure where to start with AI? We assess your business, identify high-impact AI opportunities, and build a clear roadmap with actionable steps.</span>
-        <span data-lang="es">¿No sabes por dónde empezar con la IA? Evaluamos tu negocio, identificamos oportunidades de IA de alto impacto y construimos una hoja de ruta clara con pasos accionables.</span>
-      </p>
+      <h3><span data-lang="en">AI Consulting & Strategy</span><span data-lang="es">Consultoría y Estrategia de IA</span></h3>
+      <p><span data-lang="en">Not sure where to start with AI? We assess your business, identify high-impact AI opportunities, and build a clear roadmap with actionable steps.</span><span data-lang="es">¿No sabes por dónde empezar con la IA? Evaluamos tu negocio, identificamos oportunidades de IA de alto impacto y construimos una hoja de ruta clara con pasos accionables.</span></p>
       <ul>
         <li><span data-lang="en">AI readiness assessment</span><span data-lang="es">Evaluación de preparación para IA</span></li>
         <li><span data-lang="en">Custom AI strategy & roadmap</span><span data-lang="es">Estrategia de IA personalizada y hoja de ruta</span></li>
@@ -345,14 +512,8 @@
 
     <div class="card data">
       <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>
-      <h3>
-        <span data-lang="en">Content Generation</span>
-        <span data-lang="es">Generación de Contenido</span>
-      </h3>
-      <p>
-        <span data-lang="en">AI-assisted content production at scale — marketing copy, blog posts, product descriptions, social media content, translations, and more.</span>
-        <span data-lang="es">Producción de contenido asistida por IA a escala — copy de marketing, publicaciones de blog, descripciones de productos, contenido para redes sociales, traducciones y más.</span>
-      </p>
+      <h3><span data-lang="en">Content Generation</span><span data-lang="es">Generación de Contenido</span></h3>
+      <p><span data-lang="en">AI-assisted content production at scale — marketing copy, blog posts, product descriptions, social media content, translations, and more.</span><span data-lang="es">Producción de contenido asistida por IA a escala — copy de marketing, publicaciones de blog, descripciones de productos, contenido para redes sociales, traducciones y más.</span></p>
       <ul>
         <li><span data-lang="en">Marketing copy & email sequences</span><span data-lang="es">Copy de marketing y secuencias de email</span></li>
         <li><span data-lang="en">Blog posts, articles & thought leadership</span><span data-lang="es">Artículos, posts y contenido de liderazgo intelectual</span></li>
@@ -364,52 +525,44 @@
   </div>
 
   <div class="why">
-    <h2>
-      <span data-lang="en">Why Work With BNW?</span>
-      <span data-lang="es">¿Por Qué Trabajar con BNW?</span>
-    </h2>
+    <h2><span data-lang="en">Why Work With BNW?</span><span data-lang="es">¿Por Qué Trabajar con BNW?</span></h2>
     <div class="why-grid">
       <div class="why-item">
-        <i class="fa-solid fa-rocket"></i>
+        <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
         <h4><span data-lang="en">Fast Turnaround</span><span data-lang="es">Entrega Rápida</span></h4>
         <p><span data-lang="en">AI-augmented workflows mean faster delivery without sacrificing quality.</span><span data-lang="es">Los flujos de trabajo impulsados por IA significan entrega más rápida sin sacrificar calidad.</span></p>
       </div>
-
       <div class="why-item">
-        <i class="fa-solid fa-dollar-sign"></i>
+        <div class="why-icon"><i class="fa-solid fa-dollar-sign"></i></div>
         <h4><span data-lang="en">Competitive Pricing</span><span data-lang="es">Precios Competitivos</span></h4>
         <p><span data-lang="en">AI efficiency lets us offer high-quality services at accessible rates.</span><span data-lang="es">La eficiencia de la IA nos permite ofrecer servicios de alta calidad a precios accesibles.</span></p>
       </div>
       <div class="why-item">
-        <i class="fa-solid fa-earth-americas"></i>
+        <div class="why-icon"><i class="fa-solid fa-earth-americas"></i></div>
         <h4><span data-lang="en">Worldwide Reach</span><span data-lang="es">Alcance Mundial</span></h4>
-        <p><span data-lang="en">We work with clients globally, understanding diverse markets, regulations, and business cultures.</span><span data-lang="es">Trabajamos con clientes a nivel mundial, entendiendo diversos mercados, regulaciones y culturas empresariales.</span></p>
+        <p><span data-lang="en">We work with clients globally, understanding diverse markets and cultures.</span><span data-lang="es">Trabajamos con clientes a nivel mundial, entendiendo diversos mercados y culturas.</span></p>
       </div>
     </div>
   </div>
 
   <div class="cta">
-    <h2>
-      <span data-lang="en">Ready to Get Started?</span>
-      <span data-lang="es">¿Listo para Comenzar?</span>
-    </h2>
-    <p>
-      <span data-lang="en">Tell us about your project and we'll put together a tailored proposal — no commitment required.</span>
-      <span data-lang="es">Cuéntanos sobre tu proyecto y armaremos una propuesta personalizada — sin compromiso.</span>
-    </p>
+    <h2><span data-lang="en">Ready to Get Started?</span><span data-lang="es">¿Listo para Comenzar?</span></h2>
+    <p><span data-lang="en">Tell us about your project and we'll put together a tailored proposal — no commitment required.</span><span data-lang="es">Cuéntanos sobre tu proyecto y armaremos una propuesta personalizada — sin compromiso.</span></p>
     <a href="mailto:info@bnw.ca">
-      <span data-lang="en">Get in Touch</span>
-      <span data-lang="es">Contáctanos</span>
+      <i class="fa-solid fa-paper-plane"></i>
+      <span data-lang="en">Get in Touch</span><span data-lang="es">Contáctanos</span>
     </a>
   </div>
 
 </div>
+</main>
 
 <footer>
   <p>
-    <span data-lang="en">© 2026 BNW Digital Services · </span>
-    <span data-lang="es">© 2026 BNW Servicios Digitales · </span>
-    <a href="https://github.com/bnwraptor/bnw-services">View on GitHub</a>
+    <span data-lang="en">© 2026 BNW Digital Services</span>
+    <span data-lang="es">© 2026 BNW Servicios Digitales</span>
+    · <a href="https://github.com/bnwraptor/bnw-services">GitHub</a>
+    · <a href="https://bnwraptor.com">bnwraptor.com</a>
   </p>
 </footer>
 
@@ -417,26 +570,8 @@
   function setLang(lang) {
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-
-    // Hide all lang spans, then show the active ones for this lang
-    document.querySelectorAll('[data-lang]').forEach(function(el) {
-      el.classList.remove('active');
-    });
-
-    // Activate all elements whose data-lang matches the current language (or is a shared/idempotent key)
-    document.querySelectorAll('[data-lang^="' + lang + '"]').forEach(function(el) {
-      el.classList.add('active');
-    });
-
-    // Special case for badge: it's two separate divs, handle inline display
-    if (lang === 'en') {
-      document.querySelector('[data-lang="en-badge"]').style.display = 'inline-block';
-      document.querySelector('[data-lang="es-badge"]').style.display = 'none';
-    } else {
-      document.querySelector('[data-lang="en-badge"]').style.display = 'none';
-      document.querySelector('[data-lang="es-badge"]').style.display = 'inline-block';
-    }
-
+    document.querySelectorAll('[data-lang]').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelectorAll('[data-lang^="' + lang + '"]').forEach(function(el) { el.classList.add('active'); });
     document.documentElement.lang = lang;
     try { localStorage.setItem('bnw-lang', lang); } catch(e) {}
   }
@@ -447,8 +582,8 @@
     if (saved === 'en' || saved === 'es') {
       setLang(saved);
     } else {
-      var lang = navigator.language || '';
-      setLang(lang.toLowerCase().startsWith('es') ? 'es' : 'en');
+      var lang = (navigator.language || '').toLowerCase();
+      setLang(lang.startsWith('es') ? 'es' : 'en');
     }
   }
 
