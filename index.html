@@ -56,7 +56,7 @@
       font-size: 3rem;
       margin-bottom: 12px;
     }
-    header p {
+    header .subtitle {
       font-size: 1.25rem;
       opacity: 0.9;
       max-width: 600px;
@@ -203,11 +203,11 @@
     }
     footer a { color: var(--teal); text-decoration: none; }
 
-    /* Language visibility */
+    /* Language visibility — all lang targets hidden by default */
     [data-lang] { display: none; }
     [data-lang].active { display: block; }
-    [data-lang-group] { display: none; }
-    [data-lang-group].active { display: block; }
+    [data-lang-i] { display: none; }
+    [data-lang-i].active { display: inline; }
 
     @media (max-width: 600px) {
       header h1 { font-size: 2rem; }
@@ -223,30 +223,31 @@
     <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
     <button id="btn-es" onclick="setLang('es')">ES</button>
   </div>
-  <div class="badge" data-lang-group="header-badge">
-    <span data-lang="en" class="active">Serving Clients Across Canada</span>
-    <span data-lang="es">Sirviendo a Clientes en Canadá</span>
-  </div>
-  <h1 data-lang-group="h1">
-    <span data-lang="en" class="active">BNW Digital Services</span>
-    <span data-lang="es">BNW Servicios Digitales</span>
+
+  <div class="badge" data-lang="en-badge">Serving Clients Across Canada</div>
+  <div class="badge" data-lang="es-badge" style="display:none">Sirviendo a Clientes en Canadá</div>
+
+  <h1>
+    <span data-lang="en-h1">BNW Digital Services</span>
+    <span data-lang="es-h1">BNW Servicios Digitales</span>
   </h1>
-  <p data-lang-group="header-sub">
-    <span data-lang="en" class="active">AI-powered digital services for businesses, agencies, and enterprises — built with cutting-edge AI and delivered by BNW.</span>
-    <span data-lang="es">Servicios digitales impulsados por IA para empresas, agencias y corporaciones — construidos con IA de vanguardia y entregados por BNW.</span>
+
+  <p class="subtitle">
+    <span data-lang="en-sub">AI-powered digital services for businesses, agencies, and enterprises — built with cutting-edge AI and delivered by BNW.</span>
+    <span data-lang="es-sub">Servicios digitales impulsados por IA para empresas, agencias y corporaciones — construidos con IA de vanguardia y entregados por BNW.</span>
   </p>
 </header>
 
 <div class="container">
 
-  <div class="intro" data-lang-group="intro">
+  <div class="intro">
     <h2>
-      <span data-lang="en" class="active">What We Offer</span>
-      <span data-lang="es">Lo Que Ofrecemos</span>
+      <span data-lang="en-ih2">What We Offer</span>
+      <span data-lang="es-ih2">Lo Que Ofrecemos</span>
     </h2>
     <p>
-      <span data-lang="en" class="active">From AI automation to full-scale digital transformation, we help Canadian businesses work smarter — leveraging Minimax's industry-leading AI models and a full stack of modern tools.</span>
-      <span data-lang="es">Desde automatización con IA hasta transformación digital completa, ayudamos a las empresas canadienses a trabajar de manera más inteligente — aprovechando los modelos de IA líderes de Minimax y un conjunto completo de herramientas modernas.</span>
+      <span data-lang="en-ip">From AI automation to full-scale digital transformation, we help Canadian businesses work smarter — leveraging Minimax's industry-leading AI models and a full stack of modern tools.</span>
+      <span data-lang="es-ip">Desde automatización con IA hasta transformación digital completa, ayudamos a las empresas canadienses a trabajar de manera más inteligente — aprovechando los modelos de IA líderes de Minimax y un conjunto completo de herramientas modernas.</span>
     </p>
   </div>
 
@@ -255,132 +256,108 @@
     <div class="card ai">
       <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
       <h3>
-        <span data-lang="en" class="active">AI Agents & Automation</span>
+        <span data-lang="en">AI Agents & Automation</span>
         <span data-lang="es">Agentes de IA y Automatización</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">Custom AI agents that handle customer service, lead qualification, data entry, document processing, and more — running 24/7 without human intervention.</span>
+        <span data-lang="en">Custom AI agents that handle customer service, lead qualification, data entry, document processing, and more — running 24/7 without human intervention.</span>
         <span data-lang="es">Agentes de IA personalizados que manejan servicio al cliente, calificación de prospectos, entrada de datos, procesamiento de documentos y más — funcionando 24/7 sin intervención humana.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">LLM-powered chatbots & virtual assistants</li>
-        <li data-lang="es">Chatbots y asistentes virtuales impulsados por LLM</li>
-        <li data-lang="en" class="active">Workflow automation with AI decision-making</li>
-        <li data-lang="es">Automatización de flujos con toma de decisiones por IA</li>
-        <li data-lang="en" class="active">AI agent pipelines for repetitive tasks</li>
-        <li data-lang="es">Pipelines de agentes de IA para tareas repetitivas</li>
-        <li data-lang="en" class="active">Integration with your existing tools & CRM</li>
-        <li data-lang="es">Integración con tus herramientas y CRM existentes</li>
+        <li><span data-lang="en">LLM-powered chatbots & virtual assistants</span><span data-lang="es">Chatbots y asistentes virtuales impulsados por LLM</span></li>
+        <li><span data-lang="en">Workflow automation with AI decision-making</span><span data-lang="es">Automatización de flujos con toma de decisiones por IA</span></li>
+        <li><span data-lang="en">AI agent pipelines for repetitive tasks</span><span data-lang="es">Pipelines de agentes de IA para tareas repetitivas</span></li>
+        <li><span data-lang="en">Integration with your existing tools & CRM</span><span data-lang="es">Integración con tus herramientas y CRM existentes</span></li>
       </ul>
     </div>
 
     <div class="card data">
       <div class="card-icon"><i class="fa-solid fa-chart-simple"></i></div>
       <h3>
-        <span data-lang="en" class="active">Data Scraping & Research</span>
+        <span data-lang="en">Data Scraping & Research</span>
         <span data-lang="es">Extracción de Datos e Investigación</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">Structured data extraction at scale — competitive intelligence, market research, lead lists, pricing monitoring, and custom datasets tailored to your needs.</span>
+        <span data-lang="en">Structured data extraction at scale — competitive intelligence, market research, lead lists, pricing monitoring, and custom datasets tailored to your needs.</span>
         <span data-lang="es">Extracción de datos estructurados a escala — inteligencia competitiva, investigación de mercado, listas de prospectos, monitoreo de precios y conjuntos de datos personalizados.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">Web scraping & API aggregation</li>
-        <li data-lang="es">Web scraping y agregación de APIs</li>
-        <li data-lang="en" class="active">Competitor monitoring & price intelligence</li>
-        <li data-lang="es">Monitoreo de competidores e inteligencia de precios</li>
-        <li data-lang="en" class="active">Custom database building & cleaning</li>
-        <li data-lang="es">Construcción y limpieza de bases de datos personalizadas</li>
-        <li data-lang="en" class="active">Real-time data pipelines & delivery</li>
-        <li data-lang="es">Pipelines de datos en tiempo real y entrega</li>
+        <li><span data-lang="en">Web scraping & API aggregation</span><span data-lang="es">Web scraping y agregación de APIs</span></li>
+        <li><span data-lang="en">Competitor monitoring & price intelligence</span><span data-lang="es">Monitoreo de competidores e inteligencia de precios</span></li>
+        <li><span data-lang="en">Custom database building & cleaning</span><span data-lang="es">Construcción y limpieza de bases de datos personalizadas</span></li>
+        <li><span data-lang="en">Real-time data pipelines & delivery</span><span data-lang="es">Pipelines de datos en tiempo real y entrega</span></li>
       </ul>
     </div>
 
     <div class="card web">
       <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
       <h3>
-        <span data-lang="en" class="active">Web & App Development</span>
+        <span data-lang="en">Web & App Development</span>
         <span data-lang="es">Desarrollo Web y de Apps</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">Full-stack digital product development — from landing pages and PWAs to full web applications, dashboards, and e-commerce solutions.</span>
+        <span data-lang="en">Full-stack digital product development — from landing pages and PWAs to full web applications, dashboards, and e-commerce solutions.</span>
         <span data-lang="es">Desarrollo de productos digitales full-stack — desde landing pages y PWAs hasta aplicaciones web completas, dashboards y soluciones de e-commerce.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">Responsive websites & landing pages</li>
-        <li data-lang="es">Sitios web responsivos y landing pages</li>
-        <li data-lang="en" class="active">Web applications & dashboards</li>
-        <li data-lang="es">Aplicaciones web y dashboards</li>
-        <li data-lang="en" class="active">API development & integration</li>
-        <li data-lang="es">Desarrollo e integración de APIs</li>
-        <li data-lang="en" class="active">CMS setup, migration & customization</li>
-        <li data-lang="es">Configuración, migración y personalización de CMS</li>
+        <li><span data-lang="en">Responsive websites & landing pages</span><span data-lang="es">Sitios web responsivos y landing pages</span></li>
+        <li><span data-lang="en">Web applications & dashboards</span><span data-lang="es">Aplicaciones web y dashboards</span></li>
+        <li><span data-lang="en">API development & integration</span><span data-lang="es">Desarrollo e integración de APIs</span></li>
+        <li><span data-lang="en">CMS setup, migration & customization</span><span data-lang="es">Configuración, migración y personalización de CMS</span></li>
       </ul>
     </div>
 
     <div class="card automation">
       <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
       <h3>
-        <span data-lang="en" class="active">Business Process Automation</span>
+        <span data-lang="en">Business Process Automation</span>
         <span data-lang="es">Automatización de Procesos Empresariales</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">Eliminate manual work by automating business processes end-to-end — from document handling and approvals to reporting and notifications.</span>
+        <span data-lang="en">Eliminate manual work by automating business processes end-to-end — from document handling and approvals to reporting and notifications.</span>
         <span data-lang="es">Elimina el trabajo manual automatizando procesos empresariales de extremo a extremo — desde el manejo de documentos y aprobaciones hasta reportes y notificaciones.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">Document processing & OCR pipelines</li>
-        <li data-lang="es">Procesamiento de documentos y pipelines OCR</li>
-        <li data-lang="en" class="active">Automated reporting & data pipelines</li>
-        <li data-lang="es">Reportes automatizados y pipelines de datos</li>
-        <li data-lang="en" class="active">Email & communication automation</li>
-        <li data-lang="es">Automatización de email y comunicación</li>
-        <li data-lang="en" class="active">Internal tooling & admin dashboards</li>
-        <li data-lang="es">Herramientas internas y dashboards administrativos</li>
+        <li><span data-lang="en">Document processing & OCR pipelines</span><span data-lang="es">Procesamiento de documentos y pipelines OCR</span></li>
+        <li><span data-lang="en">Automated reporting & data pipelines</span><span data-lang="es">Reportes automatizados y pipelines de datos</span></li>
+        <li><span data-lang="en">Email & communication automation</span><span data-lang="es">Automatización de email y comunicación</span></li>
+        <li><span data-lang="en">Internal tooling & admin dashboards</span><span data-lang="es">Herramientas internas y dashboards administrativos</span></li>
       </ul>
     </div>
 
     <div class="card consulting">
       <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
       <h3>
-        <span data-lang="en" class="active">AI Consulting & Strategy</span>
+        <span data-lang="en">AI Consulting & Strategy</span>
         <span data-lang="es">Consultoría y Estrategia de IA</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">Not sure where to start with AI? We assess your business, identify high-impact AI opportunities, and build a clear roadmap with actionable steps.</span>
+        <span data-lang="en">Not sure where to start with AI? We assess your business, identify high-impact AI opportunities, and build a clear roadmap with actionable steps.</span>
         <span data-lang="es">¿No sabes por dónde empezar con la IA? Evaluamos tu negocio, identificamos oportunidades de IA de alto impacto y construimos una hoja de ruta clara con pasos accionables.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">AI readiness assessment</li>
-        <li data-lang="es">Evaluación de preparación para IA</li>
-        <li data-lang="en" class="active">Custom AI strategy & roadmap</li>
-        <li data-lang="es">Estrategia de IA personalizada y hoja de ruta</li>
-        <li data-lang="en" class="active">Vendor & tool selection guidance</li>
-        <li data-lang="es">Orientación en selección de proveedores y herramientas</li>
-        <li data-lang="en" class="active">Proof-of-concept & pilot projects</li>
-        <li data-lang="es">Pruebas de concepto y proyectos piloto</li>
+        <li><span data-lang="en">AI readiness assessment</span><span data-lang="es">Evaluación de preparación para IA</span></li>
+        <li><span data-lang="en">Custom AI strategy & roadmap</span><span data-lang="es">Estrategia de IA personalizada y hoja de ruta</span></li>
+        <li><span data-lang="en">Vendor & tool selection guidance</span><span data-lang="es">Orientación en selección de proveedores y herramientas</span></li>
+        <li><span data-lang="en">Proof-of-concept & pilot projects</span><span data-lang="es">Pruebas de concepto y proyectos piloto</span></li>
       </ul>
     </div>
 
     <div class="card data">
       <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>
       <h3>
-        <span data-lang="en" class="active">Content Generation</span>
+        <span data-lang="en">Content Generation</span>
         <span data-lang="es">Generación de Contenido</span>
       </h3>
       <p>
-        <span data-lang="en" class="active">AI-assisted content production at scale — marketing copy, blog posts, product descriptions, social media content, translations, and more.</span>
+        <span data-lang="en">AI-assisted content production at scale — marketing copy, blog posts, product descriptions, social media content, translations, and more.</span>
         <span data-lang="es">Producción de contenido asistida por IA a escala — copy de marketing, publicaciones de blog, descripciones de productos, contenido para redes sociales, traducciones y más.</span>
       </p>
       <ul>
-        <li data-lang="en" class="active">Marketing copy & email sequences</li>
-        <li data-lang="es">Copy de marketing y secuencias de email</li>
-        <li data-lang="en" class="active">Blog posts, articles & thought leadership</li>
-        <li data-lang="es">Artículos, posts y contenido de liderazgo intelectual</li>
-        <li data-lang="en" class="active">Social media content & captions</li>
-        <li data-lang="es">Contenido y subtítulos para redes sociales</li>
-        <li data-lang="en" class="active">Localization & translation services</li>
-        <li data-lang="es">Servicios de localización y traducción</li>
+        <li><span data-lang="en">Marketing copy & email sequences</span><span data-lang="es">Copy de marketing y secuencias de email</span></li>
+        <li><span data-lang="en">Blog posts, articles & thought leadership</span><span data-lang="es">Artículos, posts y contenido de liderazgo intelectual</span></li>
+        <li><span data-lang="en">Social media content & captions</span><span data-lang="es">Contenido y subtítulos para redes sociales</span></li>
+        <li><span data-lang="en">Localization & translation services</span><span data-lang="es">Servicios de localización y traducción</span></li>
       </ul>
     </div>
 
@@ -388,68 +365,44 @@
 
   <div class="why">
     <h2>
-      <span data-lang="en" class="active">Why Work With BNW?</span>
+      <span data-lang="en">Why Work With BNW?</span>
       <span data-lang="es">¿Por Qué Trabajar con BNW?</span>
     </h2>
     <div class="why-grid">
       <div class="why-item">
         <i class="fa-solid fa-rocket"></i>
-        <h4>
-          <span data-lang="en" class="active">Fast Turnaround</span>
-          <span data-lang="es">Entrega Rápida</span>
-        </h4>
-        <p>
-          <span data-lang="en" class="active">AI-augmented workflows mean faster delivery without sacrificing quality.</span>
-          <span data-lang="es">Los flujos de trabajo impulsados por IA significan entrega más rápida sin sacrificar calidad.</span>
-        </p>
+        <h4><span data-lang="en">Fast Turnaround</span><span data-lang="es">Entrega Rápida</span></h4>
+        <p><span data-lang="en">AI-augmented workflows mean faster delivery without sacrificing quality.</span><span data-lang="es">Los flujos de trabajo impulsados por IA significan entrega más rápida sin sacrificar calidad.</span></p>
       </div>
       <div class="why-item">
         <i class="fa-solid fa-brain"></i>
-        <h4>
-          <span data-lang="en" class="active">Minimax AI Power</span>
-          <span data-lang="es">Poder de IA de Minimax</span>
-        </h4>
-        <p>
-          <span data-lang="en" class="active">Access to state-of-the-art AI models for reasoning, generation, and automation.</span>
-          <span data-lang="es">Acceso a modelos de IA de vanguardia para razonamiento, generación y automatización.</span>
-        </p>
+        <h4><span data-lang="en">Minimax AI Power</span><span data-lang="es">Poder de IA de Minimax</span></h4>
+        <p><span data-lang="en">Access to state-of-the-art AI models for reasoning, generation, and automation.</span><span data-lang="es">Acceso a modelos de IA de vanguardia para razonamiento, generación y automatización.</span></p>
       </div>
       <div class="why-item">
         <i class="fa-solid fa-dollar-sign"></i>
-        <h4>
-          <span data-lang="en" class="active">Competitive Pricing</span>
-          <span data-lang="es">Precios Competitivos</span>
-        </h4>
-        <p>
-          <span data-lang="en" class="active">AI efficiency lets us offer high-quality services at accessible rates.</span>
-          <span data-lang="es">La eficiencia de la IA nos permite ofrecer servicios de alta calidad a precios accesibles.</span>
-        </p>
+        <h4><span data-lang="en">Competitive Pricing</span><span data-lang="es">Precios Competitivos</span></h4>
+        <p><span data-lang="en">AI efficiency lets us offer high-quality services at accessible rates.</span><span data-lang="es">La eficiencia de la IA nos permite ofrecer servicios de alta calidad a precios accesibles.</span></p>
       </div>
       <div class="why-item">
         <i class="fa-solid fa-maple-leaf"></i>
-        <h4>
-          <span data-lang="en" class="active">Canada-Based</span>
-          <span data-lang="es">Base en Canadá</span>
-        </h4>
-        <p>
-          <span data-lang="en" class="active">We understand the Canadian market, regulations, and business culture.</span>
-          <span data-lang="es">Entendemos el mercado canadiense, las regulaciones y la cultura empresarial.</span>
-        </p>
+        <h4><span data-lang="en">Canada-Based</span><span data-lang="es">Base en Canadá</span></h4>
+        <p><span data-lang="en">We understand the Canadian market, regulations, and business culture.</span><span data-lang="es">Entendemos el mercado canadiense, las regulaciones y la cultura empresarial.</span></p>
       </div>
     </div>
   </div>
 
   <div class="cta">
     <h2>
-      <span data-lang="en" class="active">Ready to Get Started?</span>
+      <span data-lang="en">Ready to Get Started?</span>
       <span data-lang="es">¿Listo para Comenzar?</span>
     </h2>
     <p>
-      <span data-lang="en" class="active">Tell us about your project and we'll put together a tailored proposal — no commitment required.</span>
+      <span data-lang="en">Tell us about your project and we'll put together a tailored proposal — no commitment required.</span>
       <span data-lang="es">Cuéntanos sobre tu proyecto y armaremos una propuesta personalizada — sin compromiso.</span>
     </p>
     <a href="mailto:info@bnw.ca">
-      <span data-lang="en" class="active">Get in Touch</span>
+      <span data-lang="en">Get in Touch</span>
       <span data-lang="es">Contáctanos</span>
     </a>
   </div>
@@ -458,7 +411,7 @@
 
 <footer>
   <p>
-    <span data-lang="en" class="active">© 2026 BNW Digital Services · </span>
+    <span data-lang="en">© 2026 BNW Digital Services · </span>
     <span data-lang="es">© 2026 BNW Servicios Digitales · </span>
     <a href="https://github.com/bnwraptor/bnw-services">View on GitHub</a>
   </p>
@@ -466,19 +419,29 @@
 
 <script>
   function setLang(lang) {
-    // Toggle buttons
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
 
-    // Show/hide all lang spans
+    // Hide all lang spans, then show the active ones for this lang
     document.querySelectorAll('[data-lang]').forEach(function(el) {
-      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+      el.classList.remove('active');
     });
 
-    // Update html lang attribute
-    document.documentElement.lang = lang;
+    // Activate all elements whose data-lang matches the current language (or is a shared/idempotent key)
+    document.querySelectorAll('[data-lang^="' + lang + '"]').forEach(function(el) {
+      el.classList.add('active');
+    });
 
-    // Persist preference
+    // Special case for badge: it's two separate divs, handle inline display
+    if (lang === 'en') {
+      document.querySelector('[data-lang="en-badge"]').style.display = 'inline-block';
+      document.querySelector('[data-lang="es-badge"]').style.display = 'none';
+    } else {
+      document.querySelector('[data-lang="en-badge"]').style.display = 'none';
+      document.querySelector('[data-lang="es-badge"]').style.display = 'inline-block';
+    }
+
+    document.documentElement.lang = lang;
     try { localStorage.setItem('bnw-lang', lang); } catch(e) {}
   }
 
@@ -488,8 +451,7 @@
     if (saved === 'en' || saved === 'es') {
       setLang(saved);
     } else {
-      // Auto-detect: check navigator.language
-      var lang = navigator.language || navigator.userLanguage || '';
+      var lang = navigator.language || '';
       setLang(lang.toLowerCase().startsWith('es') ? 'es' : 'en');
     }
   }
